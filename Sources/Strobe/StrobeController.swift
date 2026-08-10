@@ -18,7 +18,7 @@ final class StrobeController: ObservableObject {
     @Published private(set) var isStrobing = false
 
     /// Selected strobe frequency in Hz (1...50). Locked while `isStrobing`.
-    @Published var frequencyHz: Int = 10
+    @Published var frequencyHz: Int = 33
 
     /// Whether this device exposes a torch at all (false on Simulator, iPad, etc).
     @Published private(set) var isTorchAvailable: Bool
@@ -47,7 +47,7 @@ final class StrobeController: ObservableObject {
     func start() {
         guard !isStrobing else { return }
         guard let device, device.hasTorch else {
-            errorMessage = "На этом устройстве недоступен фонарик."
+            errorMessage = "Torch is not available on this device."
             return
         }
 
@@ -102,7 +102,7 @@ final class StrobeController: ObservableObject {
             device.torchMode = on ? .on : .off
             device.unlockForConfiguration()
         } catch {
-            let message = "Не удалось управлять фонариком: \(error.localizedDescription)"
+            let message = "Unable to control the flashlight: \(error.localizedDescription)"
             DispatchQueue.main.async { [weak self] in
                 self?.errorMessage = message
             }
