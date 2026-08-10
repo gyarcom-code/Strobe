@@ -1,0 +1,24 @@
+name: Strobe
+options:
+  bundleIdPrefix: com.gyarcom
+  deploymentTarget:
+    iOS: "18.0"
+  createIntermediateGroups: true
+
+targets:
+  Strobe:
+    type: application
+    platform: iOS
+    deploymentTarget: "18.0"
+    sources:
+      - path: Sources/Strobe
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.gyarcom.Strobe
+        PRODUCT_NAME: Strobe
+        MARKETING_VERSION: "1.0.0"
+        CURRENT_PROJECT_VERSION: "1"
+        SWIFT_VERSION: "5.0"
+        TARGETED_DEVICE_FAMILY: "1,2"
+        GENERATE_INFOPLIST_FILE: NO
+        INFOPLIST_FILE: Sources/Strobe/Info.plist
