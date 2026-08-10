@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A9EF1341559AF6567414B11 /* StrobeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC65FA4E2D7477894A0C155B /* StrobeController.swift */; };
 		CB3213012B8BA2D1C8F3A847 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3FBD2009BF5A85D70D77AA /* ContentView.swift */; };
 		D7881D6950E88F5D3E7D137E /* StrobeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66238BA7AD7233BDBC829724 /* StrobeApp.swift */; };
 /* End PBXBuildFile section */
@@ -16,6 +17,7 @@
 		1D10FD41E59388D691B58790 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		337722BBE0194BC6E3E652B0 /* Strobe.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Strobe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66238BA7AD7233BDBC829724 /* StrobeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrobeApp.swift; sourceTree = "<group>"; };
+		DC65FA4E2D7477894A0C155B /* StrobeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrobeController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -33,6 +35,7 @@
 				1C3FBD2009BF5A85D70D77AA /* ContentView.swift */,
 				1D10FD41E59388D691B58790 /* Info.plist */,
 				66238BA7AD7233BDBC829724 /* StrobeApp.swift */,
+				DC65FA4E2D7477894A0C155B /* StrobeController.swift */,
 			);
 			path = Strobe;
 			sourceTree = "<group>";
@@ -110,6 +113,7 @@
 			files = (
 				CB3213012B8BA2D1C8F3A847 /* ContentView.swift in Sources */,
 				D7881D6950E88F5D3E7D137E /* StrobeApp.swift in Sources */,
+				3A9EF1341559AF6567414B11 /* StrobeController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
