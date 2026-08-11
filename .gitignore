@@ -1,6 +1,7 @@
 # Xcode
 #
 build/
+build_device/
 DerivedData/
 *.pbxuser
 !default.pbxuser
@@ -51,3 +52,6 @@ fastlane/test_output
 .DS_Store
 *.swp
 *~.nib
+
+## Claude Code local settings
+.claude/
