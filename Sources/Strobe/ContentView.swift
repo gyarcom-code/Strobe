@@ -43,7 +43,6 @@ struct ContentView: View {
                 }
                 .pickerStyle(.wheel)
                 .frame(maxHeight: 150)
-                .disabled(strobeController.isStrobing)
 
                 Button {
                     withAnimation(.easeInOut(duration: 0.25)) {

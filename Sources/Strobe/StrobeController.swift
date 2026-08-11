@@ -17,8 +17,14 @@ final class StrobeController: ObservableObject {
     /// Whether the strobe loop is currently running.
     @Published private(set) var isStrobing = false
 
-    /// Selected strobe frequency in Hz (1...50). Locked while `isStrobing`.
-    @Published var frequencyHz: Int = 33
+    /// Selected strobe frequency in Hz (1...50). Changing this while
+    /// `isStrobing` retunes the running timer immediately, no stop/start required.
+    @Published var frequencyHz: Int = 33 {
+        didSet {
+            guard isStrobing, frequencyHz != oldValue else { return }
+            restartTimer()
+        }
+    }
 
     /// Whether this device exposes a torch at all (false on Simulator, iPad, etc).
     @Published private(set) var isTorchAvailable: Bool
@@ -53,22 +59,7 @@ final class StrobeController: ObservableObject {
 
         errorMessage = nil
         isStrobing = true
-
-        let clampedHz = max(1, min(50, frequencyHz))
-        let interval = 1.0 / (Double(clampedHz) * 2.0)
-
-        queue.async { [weak self] in
-            guard let self else { return }
-            self.torchIsOn = false
-
-            let timer = DispatchSource.makeTimerSource(queue: self.queue)
-            timer.schedule(deadline: .now(), repeating: interval, leeway: .milliseconds(1))
-            timer.setEventHandler { [weak self] in
-                self?.toggleTorchOnQueue()
-            }
-            self.timer = timer
-            timer.resume()
-        }
+        restartTimer()
     }
 
     /// Stops the strobe loop and guarantees the torch is switched off.
@@ -85,6 +76,28 @@ final class StrobeController: ObservableObject {
             self.timer = nil
             self.torchIsOn = false
             self.setTorch(on: false)
+        }
+    }
+
+    /// (Re)schedules the toggle timer at the current `frequencyHz`, replacing
+    /// any timer already running. Used both to start strobing and to retune
+    /// the frequency live while strobing.
+    private func restartTimer() {
+        let clampedHz = max(1, min(50, frequencyHz))
+        let interval = 1.0 / (Double(clampedHz) * 2.0)
+
+        queue.async { [weak self] in
+            guard let self else { return }
+            self.timer?.cancel()
+            self.torchIsOn = false
+
+            let timer = DispatchSource.makeTimerSource(queue: self.queue)
+            timer.schedule(deadline: .now(), repeating: interval, leeway: .milliseconds(1))
+            timer.setEventHandler { [weak self] in
+                self?.toggleTorchOnQueue()
+            }
+            self.timer = timer
+            timer.resume()
         }
     }
 
